@@ -11,7 +11,7 @@ const SignIn = ({navigation, signIn}) => {
   const [password, setPassword] = useState('');
 
   const doSignIn = () => {
-    signIn(email, password);
+    signIn({email, password});
   };
 
   return (
