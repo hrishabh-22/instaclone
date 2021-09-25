@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {StyleSheet, ScrollView, TouchableOpacity, View} from 'react-native';
+
 import {
-  Text,
   Container,
   Form,
   Item,
   Input,
+  Text,
   Button,
   Thumbnail,
   Content,
@@ -13,8 +14,11 @@ import {
 
 import storage from '@react-native-firebase/storage';
 import ProgressBar from 'react-native-progress/Bar';
+
 import ImagePicker from 'react-native-image-picker';
-import {options} from '../utils/Options';
+import {options} from '../utils/options';
+
+//redux
 import propTypes from 'prop-types';
 import {signUp} from '../action/auth';
 import {connect} from 'react-redux';
@@ -23,7 +27,7 @@ const SignUp = ({signUp}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [instaUserName, setInstaUserName] = useState();
+  const [instaUserName, setInstaUserName] = useState('');
   const [country, setCountry] = useState('');
   const [bio, setBio] = useState('');
   const [image, setImage] = useState(
@@ -38,9 +42,9 @@ const SignUp = ({signUp}) => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
-        console.log('User Cancled Image Picker');
+        console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('Image Picker error: ', response.error);
+        console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
@@ -53,6 +57,7 @@ const SignUp = ({signUp}) => {
   const uploadImage = async response => {
     setImageUploading(true);
     const reference = storage().ref(response.fileName);
+
     const task = reference.putFile(response.path);
     task.on('state_changed', taskSnapshot => {
       const percentage =
@@ -60,8 +65,10 @@ const SignUp = ({signUp}) => {
 
       setUploadStatus(percentage);
     });
+
     task.then(async () => {
       const url = await reference.getDownloadURL();
+
       setImage(url);
       setImageUploading(false);
     });
