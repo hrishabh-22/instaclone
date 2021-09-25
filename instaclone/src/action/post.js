@@ -1,5 +1,4 @@
 import database from '@react-native-firebase/database';
-import storage from '@react-native-firebase/storage';
 import {SET_POST, ERROR_POST} from './action.types';
 
 export const getPost = () => async dispatch => {

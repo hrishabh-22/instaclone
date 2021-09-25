@@ -21,9 +21,9 @@ export const signUp = data => async dispatch => {
           bio,
           uid: data.user.uid,
         })
-        .then(() => console.log('Data set Success'));
+        .then(() => console.log('Data set success'));
       Snackbar.show({
-        text: 'Account Created',
+        text: 'account created',
         textColor: 'white',
         backgroundColor: '#1b262c',
       });
