@@ -85,6 +85,7 @@ const AddPost = ({navigation, userState}) => {
         date: Date.now(),
         instaId: userState.instaUserName,
         userImage: userState.image,
+        id: uid,
       });
       console.log('Post Added Success');
       navigation.navigate('Home');
